@@ -23,29 +23,47 @@
 
         <div class="row">
             <div class="col-md-7">            
-                <form>
-                    <div class="form-group">
+                <form name="form" ng-submit="save(form.$valid)" novalidate>
+                    <div class="form-group" ng-class="{
+                        'has-error': form.name.$invalid && !form.$pristine,
+                        'has-success': form.name.$valid && !form.$pristine
+                    }">
                         <label for="name">Name</label>
-                        <input type="text" id="name" class="form-control">
+                        <input ng-model="formData.name" name="name" type="text" id="name" class="form-control" required>
+                        <p class="help-block"
+                            ng-hide="form.name.$valid || form.$pristine">
+                            This field are required.
+                        </p>
                     </div>
 
                     <div class="form-group">
                         <label for="age">Age</label>
-                        <input type="number" id="age" class="form-control">
+                        <input ng-model="formData.age" name="age" type="number" id="age" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="gender">Gender</label>
-                        <select class="form-control" id="gender">
+                        <select ng-model="formData.gender" name="gender" class="form-control" id="gender">
                             <option value=""></option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{
+                        'has-error': form.email.$invalid && !form.$pristine,
+                        'has-success': form.email.$valid && !form.$pristine
+                    }">
                         <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control">
+                        <input ng-model="formData.email" name="email" type="email" id="email" class="form-control" required>
+                        <p class="help-block"
+                            ng-show="form.email.$error.required">
+                            This field are required.
+                        </p>
+                        <p class="help-block"
+                            ng-show="form.email.$error.email">
+                            Invalid email.
+                        </p>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save</button>
@@ -54,7 +72,7 @@
 
             <div class="col-md-5">
                 <label>Data structure</label>
-                <pre></pre>
+                <pre>{{ form | json }}</pre>
             </div>
         </div>
     </div>
