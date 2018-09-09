@@ -1,5 +1,5 @@
 
-var app = angular.module('formApp',[ ]);
+var app = angular.module('formApp',['jcs-autoValidate']);
 
 app.controller('mainCtrl', ['$scope', function($scope){
     $scope.formData = {};

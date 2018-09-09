@@ -14,6 +14,7 @@
 
     <!-- Incluir AngularJS -->
     <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/jcs-auto-validate.js"></script>
     <script src="js/app.js"></script>
 </head>
 <body> 
@@ -24,46 +25,28 @@
         <div class="row">
             <div class="col-md-7">            
                 <form name="form" ng-submit="save(form.$valid)" novalidate>
-                    <div class="form-group" ng-class="{
-                        'has-error': form.name.$invalid && !form.$pristine,
-                        'has-success': form.name.$valid && !form.$pristine
-                    }">
-                        <label for="name">Name</label>
+                    <div class="form-group">
+                        <label for="name" class="control-label">Name</label>
                         <input ng-model="formData.name" name="name" type="text" id="name" class="form-control" required>
-                        <p class="help-block"
-                            ng-hide="form.name.$valid || form.$pristine">
-                            This field are required.
-                        </p>
                     </div>
 
                     <div class="form-group">
-                        <label for="age">Age</label>
-                        <input ng-model="formData.age" name="age" type="number" id="age" class="form-control">
+                        <label for="age" class="control-label">Age</label>
+                        <input ng-model="formData.age" name="age" type="number" min="18" max="75" id="age" class="form-control" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="gender">Gender</label>
-                        <select ng-model="formData.gender" name="gender" class="form-control" id="gender">
+                        <label for="gender" class="control-label">Gender</label>
+                        <select ng-model="formData.gender" name="gender" class="form-control" id="gender" required>
                             <option value=""></option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select>
                     </div>
 
-                    <div class="form-group" ng-class="{
-                        'has-error': form.email.$invalid && !form.$pristine,
-                        'has-success': form.email.$valid && !form.$pristine
-                    }">
-                        <label for="email">Email</label>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email</label>
                         <input ng-model="formData.email" name="email" type="email" id="email" class="form-control" required>
-                        <p class="help-block"
-                            ng-show="form.email.$error.required">
-                            This field are required.
-                        </p>
-                        <p class="help-block"
-                            ng-show="form.email.$error.email">
-                            Invalid email.
-                        </p>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save</button>
